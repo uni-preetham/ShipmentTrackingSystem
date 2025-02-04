@@ -1,0 +1,35 @@
+nav {
+    background-color: #cfcfcf;
+    padding: 10px 20px;
+    border-radius: 16px;
+    color: white;
+  }
+  
+  ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  li {
+    display: inline;
+  }
+  
+  a {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    padding: 8px 16px;
+  }
+  
+  a:hover {
+    background-color: #555;
+    border-radius: 16px;
+    color: white;
+  }
+  
+  .active {
+    font-weight: bold;
+    background-color: #ffffff;
+    border-radius: 16px;
+  }
+  

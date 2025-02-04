@@ -1,0 +1,27 @@
+<button pButton label="Add Shipment" icon="pi pi-plus" (click)="openDialog()"></button>
+
+<p-dialog header="Add Shipment" [(visible)]="shipmentDialog" modal="true" [style]="{ width: '50vw' }">
+  <div class="p-fluid">
+    <div class="p-field">
+      <label for="containerNumber">Container Number</label>
+      <input id="containerNumber" pInputText [(ngModel)]="shipment.containerNumber" />
+    </div>
+
+    <div class="p-field">
+      <label for="originPort">Origin Port</label>
+      <input id="originPort" pInputText [(ngModel)]="shipment.originPort" />
+    </div>
+
+    <div class="p-field">
+      <label for="destinationPort">Destination Port</label>
+      <input id="destinationPort" pInputText [(ngModel)]="shipment.destinationPort" />
+    </div>
+
+    <div class="p-field">
+      <label for="status">Status</label>
+      <p-dropdown id="status" [options]="['Pending', 'In Transit', 'Arrived', 'Cleared']" [(ngModel)]="shipment.status"></p-dropdown>
+    </div>
+
+    <button pButton label="Submit" icon="pi pi-check" (click)="addShipment()"></button>
+  </div>
+</p-dialog>
