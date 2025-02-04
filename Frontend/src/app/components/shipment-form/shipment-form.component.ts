@@ -9,10 +9,11 @@ import { CalendarModule } from 'primeng/calendar';
 import { CheckboxModule } from 'primeng/checkbox';
 import { InputTextModule } from 'primeng/inputtext';
 import { DropdownModule } from 'primeng/dropdown';
+import { FloatLabelModule } from 'primeng/floatlabel';
 
 @Component({
   imports: [
-    FormsModule, DialogModule, SelectModule, ButtonModule,
+    FormsModule, DialogModule, SelectModule, ButtonModule, FloatLabelModule,
     TableModule, CalendarModule, CheckboxModule, InputTextModule, DropdownModule
   ],
   selector: 'app-shipment-form',
@@ -51,6 +52,7 @@ export class ShipmentFormComponent {
   constructor(private shipmentService: ShipmentService) {}
 
   async addShipment() {
+    console.log(this.shipment);
     await this.shipmentService.createShipment(this.shipment);
     alert('Shipment Added Successfully');
     this.shipmentDialog = false;

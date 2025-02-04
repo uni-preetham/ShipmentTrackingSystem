@@ -3,12 +3,12 @@ import { ShipmentService } from '../shipment-service';
 import { FormsModule } from '@angular/forms';
 import { DialogModule } from 'primeng/dialog';
 import { RouterModule } from '@angular/router';
-import { DropdownModule } from 'primeng/dropdown';
+import { SelectModule } from 'primeng/select';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 
 @Component({
-  imports: [FormsModule, DialogModule,TableModule, DropdownModule, ButtonModule,RouterModule],
+  imports: [FormsModule, DialogModule, TableModule, SelectModule, ButtonModule, RouterModule],
   selector: 'app-shipment-list',
   templateUrl: './shipment-list.component.html',
   styleUrls: ['./shipment-list.component.scss'],
