@@ -1,7 +1,7 @@
 ul > li {
   list-style: none;
   cursor: pointer;
-  margin: 30px 20px;
+  margin: 30px 0px;
 }
 
 li > a {

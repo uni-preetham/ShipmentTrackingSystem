@@ -1,0 +1,29 @@
+p{
+    font-size: 18px;
+}
+
+.text1, .text2{
+    width: 700px;
+    text-align: justify;
+    background: rgb(232, 232, 232);
+    padding: 10px 40px;
+    border-radius: 20px;
+}
+
+h1{
+    font-size: 40px;
+}
+
+.section1{
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 40px;
+    margin-bottom: 100px;
+}
+
+.section2{
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 40px;
+}
+

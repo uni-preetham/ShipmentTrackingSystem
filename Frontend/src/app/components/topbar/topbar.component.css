@@ -9,5 +9,5 @@ nav{
 }
 img{
     width: 200px;
-    filter: blur(2px);
+    /* filter: blur(2px); */
 }
