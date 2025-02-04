@@ -1,0 +1,12 @@
+nav{
+    padding: 10px 40px;
+    background: #cfcfcf;
+    border-radius: 16px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+img{
+    width: 200px;
+}

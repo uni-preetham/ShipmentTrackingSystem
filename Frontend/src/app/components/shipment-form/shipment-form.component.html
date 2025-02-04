@@ -1,10 +1,16 @@
-<button pButton label="Add Shipment" icon="pi pi-plus" (click)="openDialog()"></button>
+<p-button label="Add Shipment" icon="pi pi-plus" (click)="openDialog()"></p-button>
 
-<p-dialog header="Add Shipment" [(visible)]="shipmentDialog" modal="true" [style]="{ width: '50vw' }">
+<p-dialog header="Add Shipment" [(visible)]="shipmentDialog" modal="true" [style]="{ width: '60vw' }">
   <div class="p-fluid">
+    <!-- General Shipment Details -->
     <div class="p-field">
       <label for="containerNumber">Container Number</label>
-      <input id="containerNumber" pInputText [(ngModel)]="shipment.containerNumber" />
+      <input id="containerNumber" pInputText [(ngModel)]="shipment.containerNumber" required />
+    </div>
+
+    <div class="p-field">
+      <label for="blNumber">Bill of Lading (BL) Number</label>
+      <input id="blNumber" pInputText [(ngModel)]="shipment.blNumber" />
     </div>
 
     <div class="p-field">
@@ -18,8 +24,79 @@
     </div>
 
     <div class="p-field">
+      <label for="shipperName">Shipper Name</label>
+      <input id="shipperName" pInputText [(ngModel)]="shipment.shipperName" />
+    </div>
+
+    <div class="p-field">
+      <label for="consigneeName">Consignee Name</label>
+      <input id="consigneeName" pInputText [(ngModel)]="shipment.consigneeName" />
+    </div>
+
+    <div class="p-field">
+      <label for="cargoType">Cargo Type</label>
+      <p-dropdown id="cargoType" [options]="cargoTypes" [(ngModel)]="shipment.cargoType"></p-dropdown>
+    </div>
+
+    <div class="p-field">
+      <label for="weight">Weight (kg/tons)</label>
+      <input id="weight" pInputText [(ngModel)]="shipment.weight" type="number" />
+    </div>
+
+    <div class="p-field">
+      <label for="volume">Volume (CBM)</label>
+      <input id="volume" pInputText [(ngModel)]="shipment.volume" type="number" />
+    </div>
+
+    <div class="p-field">
+      <label for="numberOfPackages">Number of Packages</label>
+      <input id="numberOfPackages" pInputText [(ngModel)]="shipment.numberOfPackages" type="number" />
+    </div>
+
+    <div class="p-field">
+      <label for="expectedDepartureDate">Expected Departure Date</label>
+      <p-calendar [(ngModel)]="shipment.expectedDepartureDate" [showIcon]="true"></p-calendar>
+    </div>
+
+    <div class="p-field">
+      <label for="expectedArrivalDate">Expected Arrival Date</label>
+      <p-calendar [(ngModel)]="shipment.expectedArrivalDate" [showIcon]="true"></p-calendar>
+    </div>
+
+    <div class="p-field">
       <label for="status">Status</label>
-      <p-dropdown id="status" [options]="['Pending', 'In Transit', 'Arrived', 'Cleared']" [(ngModel)]="shipment.status"></p-dropdown>
+      <p-dropdown id="status" [options]="statuses" [(ngModel)]="shipment.status"></p-dropdown>
+    </div>
+
+    <!-- Tracking & Transportation Details -->
+    <div class="p-field">
+      <label for="carrierName">Shipping Line / Carrier Name</label>
+      <input id="carrierName" pInputText [(ngModel)]="shipment.carrierName" />
+    </div>
+
+    <div class="p-field">
+      <label for="vesselName">Vessel Name / Voyage Number</label>
+      <input id="vesselName" pInputText [(ngModel)]="shipment.vesselName" />
+    </div>
+
+    <div class="p-field">
+      <label for="trackingNumber">Tracking Number</label>
+      <input id="trackingNumber" pInputText [(ngModel)]="shipment.trackingNumber" />
+    </div>
+
+    <div class="p-field">
+      <label for="modeOfTransport">Mode of Transport</label>
+      <p-dropdown id="modeOfTransport" [options]="modesOfTransport" [(ngModel)]="shipment.modeOfTransport"></p-dropdown>
+    </div>
+
+    <div class="p-field">
+      <label for="dutiesPaid">Duties & Taxes Paid</label>
+      <p-checkbox [(ngModel)]="shipment.dutiesPaid"></p-checkbox>
+    </div>
+
+    <div class="p-field">
+      <label for="notes">Notes</label>
+      <textarea id="notes" pInputTextarea [(ngModel)]="shipment.notes"></textarea>
     </div>
 
     <button pButton label="Submit" icon="pi pi-check" (click)="addShipment()"></button>

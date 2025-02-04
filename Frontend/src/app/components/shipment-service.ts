@@ -13,7 +13,9 @@ export class ShipmentService {
   }
 
   async createShipment(shipment: any): Promise<any> {
-    const response = await axios.post(this.apiUrl, shipment);
+    const response = await axios.post(this.apiUrl, shipment, {
+      headers : {'Content-Type' : 'application/json'}
+    });
     return response.data;
   }
 

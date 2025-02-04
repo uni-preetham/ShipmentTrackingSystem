@@ -2,31 +2,50 @@ import { Component } from '@angular/core';
 import { ShipmentService } from '../shipment-service';
 import { FormsModule } from '@angular/forms';
 import { DialogModule } from 'primeng/dialog';
-import { DropdownModule } from 'primeng/dropdown';
-import { RouterModule } from '@angular/router';
+import { SelectModule } from 'primeng/select';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
+import { CalendarModule } from 'primeng/calendar';
+import { CheckboxModule } from 'primeng/checkbox';
+import { InputTextModule } from 'primeng/inputtext';
+import { DropdownModule } from 'primeng/dropdown';
 
 @Component({
-  imports: [FormsModule, DialogModule, DropdownModule, ButtonModule, TableModule, RouterModule],
+  imports: [
+    FormsModule, DialogModule, SelectModule, ButtonModule,
+    TableModule, CalendarModule, CheckboxModule, InputTextModule, DropdownModule
+  ],
   selector: 'app-shipment-form',
   templateUrl: './shipment-form.component.html',
   styleUrls: ['./shipment-form.component.scss'],
 })
 export class ShipmentFormComponent {
-  shipmentDialog: boolean = false; // Controls the visibility of the dialog
+  shipmentDialog: boolean = false;
+
+  statuses = ['Pending', 'In Transit', 'Arrived', 'Cleared'];
+  cargoTypes = ['General Cargo', 'Liquid', 'Dangerous Goods'];
+  modesOfTransport = ['Sea', 'Air', 'Land', 'Rail'];
 
   shipment = {
     containerNumber: '',
+    blNumber: '',
     originPort: '',
     destinationPort: '',
     shipperName: '',
     consigneeName: '',
     cargoType: '',
     weight: 0,
+    volume: 0,
+    numberOfPackages: 0,
     expectedDepartureDate: '',
     expectedArrivalDate: '',
-    status: 'Pending'
+    status: 'Pending',
+    carrierName: '',
+    vesselName: '',
+    trackingNumber: '',
+    modeOfTransport: '',
+    dutiesPaid: false,
+    notes: ''
   };
 
   constructor(private shipmentService: ShipmentService) {}
@@ -34,10 +53,10 @@ export class ShipmentFormComponent {
   async addShipment() {
     await this.shipmentService.createShipment(this.shipment);
     alert('Shipment Added Successfully');
-    this.shipmentDialog = false; // Close dialog after adding shipment
+    this.shipmentDialog = false;
   }
 
   openDialog() {
-    this.shipmentDialog = true; // Open dialog when needed
+    this.shipmentDialog = true;
   }
 }
