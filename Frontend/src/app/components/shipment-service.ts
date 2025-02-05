@@ -24,6 +24,11 @@ export class ShipmentService {
     return response.data;
   }
 
+  async updateShipment(shipment: any): Promise<any> {
+    const response = await axios.put(`${this.apiUrl}/${shipment.id}`, shipment,{headers : {'Content-Type' : 'application/json'}});
+    return response.data;
+  }
+
   async deleteShipment(id: number): Promise<any> {
     const response = await axios.delete(`${this.apiUrl}/${id}`);
     return response.data;

@@ -12,12 +12,12 @@ import { DropdownModule } from 'primeng/dropdown';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
-
+import { CardModule } from 'primeng/card';
 
 @Component({
   imports: [
     FormsModule, DialogModule, SelectModule, ButtonModule, FloatLabelModule,
-    TableModule, CalendarModule, CheckboxModule, InputTextModule, DropdownModule, ToastModule
+    TableModule, CalendarModule, CheckboxModule, InputTextModule, DropdownModule, ToastModule, CardModule
   ],
   selector: 'app-shipment-form',
   templateUrl: './shipment-form.component.html',
@@ -30,6 +30,7 @@ export class ShipmentFormComponent {
   statuses = ['Pending', 'In Transit', 'Arrived', 'Cleared'];
   cargoTypes = ['General Cargo', 'Liquid', 'Dangerous Goods'];
   modesOfTransport = ['Sea', 'Air', 'Land', 'Rail'];
+  inspectionStatuses = ['Pending', 'Cleared', 'Held for Inspection'];
 
   shipment = {
     containerNumber: '',
@@ -50,7 +51,10 @@ export class ShipmentFormComponent {
     trackingNumber: '',
     modeOfTransport: '',
     dutiesPaid: false,
-    notes: ''
+    notes: '',
+    hsCode: '',
+    customsDeclarationNumber: '',
+    inspectionStatus: ''
   };
 
   constructor(private shipmentService: ShipmentService, private messageService: MessageService) {}

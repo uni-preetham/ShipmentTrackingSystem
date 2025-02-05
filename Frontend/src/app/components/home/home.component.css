@@ -10,8 +10,8 @@ p{
 
 
 .section1, .section2{
-    width: 1000px;
-    background: rgb(232, 232, 232);
+    width: 1200px;
+    background: rgb(200, 239, 188);
     display: flex;
     justify-content: space-around;
     align-items: center;

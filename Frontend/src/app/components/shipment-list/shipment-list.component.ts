@@ -9,12 +9,14 @@ import { TableModule } from 'primeng/table';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import {faTrashCan} from '@fortawesome/free-solid-svg-icons'
+import {faTrashCan, faEdit} from '@fortawesome/free-solid-svg-icons'
+import { FloatLabelModule } from 'primeng/floatlabel';
+import { InputTextModule } from 'primeng/inputtext';
 
 
 
 @Component({
-  imports: [FormsModule, DialogModule, TableModule, SelectModule, ButtonModule, RouterModule, ToastModule, FontAwesomeModule],
+  imports: [FormsModule, InputTextModule, DialogModule, TableModule, SelectModule, ButtonModule, RouterModule, ToastModule, FontAwesomeModule, FloatLabelModule],
   selector: 'app-shipment-list',
   templateUrl: './shipment-list.component.html',
   styleUrls: ['./shipment-list.component.scss'],
@@ -24,10 +26,14 @@ import {faTrashCan} from '@fortawesome/free-solid-svg-icons'
 
 export class ShipmentListComponent implements OnInit {
   faTrashCan = faTrashCan;
+  faEdit = faEdit;
   deleteDialog: boolean = false; // Controls delete confirmation dialog
   selectedShipmentId: number | null = null; // Stores ID of shipment to delete
   shipments: any[] = [];
   statuses = ['Pending', 'In Transit', 'Arrived', 'Cleared'];
+  modesOfTransport = ['Sea', 'Air', 'Land', 'Rail'];
+  editDialog: boolean = false;
+  selectedShipment: any = {};
 
   constructor(private shipmentService: ShipmentService, private messageService: MessageService) {}
 
@@ -67,5 +73,21 @@ export class ShipmentListComponent implements OnInit {
   cancelDelete() {
     this.deleteDialog = false;
     this.selectedShipmentId = null;
+  }
+
+  openEditDialog(shipment: any) {
+    this.selectedShipment = { ...shipment }; // Clone the shipment object
+    this.editDialog = true;
+  }
+
+  async updateShipment() {
+    try {
+      await this.shipmentService.updateShipment(this.selectedShipment);
+      this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Shipment updated successfully' });
+      this.editDialog = false;
+      this.loadShipments();
+    } catch (error: any) {
+      this.messageService.add({ severity: 'error', summary: 'Error', detail: error.response?.data || 'Failed to update shipment' });
+    }
   }
 }

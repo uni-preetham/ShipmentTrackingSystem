@@ -1,30 +1,44 @@
 ul > li {
   list-style: none;
   cursor: pointer;
-  margin: 30px 0px;
+  margin: 10px 0px;
+  padding: 10px;
+  /* background: #000; */
+  border-radius: 12px;
+  border: 2px   solid white;
+
+}
+
+ul{
+  
+  width: 100%;
 }
 
 li > a {
   text-decoration: none;
   color: black;
-  padding: 10px;
-  /* background: grey; */
-  border-radius: 12px;
+  width: 100%;
+}
+
+li:hover{
+  background: #c3c3c3!important;
+  color: white;
+  border: 2px   solid black;
 }
 
 .active {
-  font-weight: bold;
-  background-color: #ffffff;
+  /* font-weight: bold; */
+  color: white;
   border-radius: 16px;
+  border: 2px   solid black!important;
 }
 
 nav {
   margin: 0px 0px 0 20px;
   padding: 0 20px;
   width: 300px;
-  background-color: #cfcfcf;
+  /* background-color: #cfcfcf; */
   border-radius: 16px;
-  color: white;
   height: 100%;
   display: flex;
   justify-content: start;
