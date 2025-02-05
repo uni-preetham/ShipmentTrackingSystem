@@ -4,6 +4,8 @@ import com.crimsonlogic.tradesystem.DTO.ShipmentDTO;
 import com.crimsonlogic.tradesystem.entity.Shipment;
 import com.crimsonlogic.tradesystem.service.ShipmentService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,8 +33,14 @@ public class ShipmentController {
     }
 
     @DeleteMapping("/{id}")
-    public String deleteShipment(@PathVariable Long id) {
-        shipmentService.deleteShipment(id);
-        return "Shipment deleted successfully!";
+    public ResponseEntity<?> deleteShipment(@PathVariable Long id) {
+        try {
+            shipmentService.deleteShipment(id);
+            return ResponseEntity.ok("Shipment deleted successfully!");
+        } catch (IllegalStateException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred.");
+        }
     }
 }

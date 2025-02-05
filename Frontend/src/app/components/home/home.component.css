@@ -3,27 +3,35 @@ p{
 }
 
 .text1, .text2{
-    width: 700px;
     text-align: justify;
-    background: rgb(232, 232, 232);
     padding: 10px 40px;
     border-radius: 20px;
 }
 
-h1{
-    font-size: 40px;
+
+.section1, .section2{
+    width: 1000px;
+    background: rgb(232, 232, 232);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 20px 0px;
+    padding: 20px 40px;
+}
+
+section > img{
+    border-radius: 100%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    width:300px;
 }
 
 .section1{
-    display: flex;
-    justify-content: space-around;
-    margin: 20px 40px;
-    margin-bottom: 100px;
+    border-radius: 0 160px 160px 0;
+}
+.section2{
+    border-radius:  160px 0 0 160px ;
+    float: right;
 }
 
-.section2{
-    display: flex;
-    justify-content: space-around;
-    margin: 20px 40px;
-}
 
