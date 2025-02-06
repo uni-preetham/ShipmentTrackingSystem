@@ -12,7 +12,7 @@ export class ShipmentService {
     return response.data;
   }
 
-  async createShipment(shipment: any): Promise<any> {
+  async createShipment(shipment: any){
     try {
       const response = await axios.post(`${this.apiUrl}`, shipment, { headers: { 'Content-Type': 'application/json' } });
       return response.data;

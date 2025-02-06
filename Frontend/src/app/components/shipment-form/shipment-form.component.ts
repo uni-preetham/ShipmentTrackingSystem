@@ -56,7 +56,7 @@ export class ShipmentFormComponent {
     numberOfPackages: 0,
     expectedDepartureDate: '',
     expectedArrivalDate: '',
-    status: 'Pending',
+    // status: 'Pending',
     carrierName: '',
     vesselName: '',
     trackingNumber: '',
@@ -74,12 +74,11 @@ export class ShipmentFormComponent {
   ) {}
 
   async addShipment() {
-    if (!this.shipment.containerNumber || !this.shipment.originPort || !this.shipment.status || !this.shipment.hsCode) {
+    if (!this.shipment.containerNumber || !this.shipment.originPort || !this.shipment.hsCode) {
       this.messageService.add({ severity: 'error', summary: 'Validation Error', detail: 'Please fill in all required fields' });
       return;
     }
     try {
-      console.log(this.shipment);
       await this.shipmentService.createShipment(this.shipment);
       this.messageService.add({
         severity: 'success',
@@ -111,7 +110,6 @@ export class ShipmentFormComponent {
       this.shipment.weight !== null &&
       this.shipment.expectedDepartureDate &&
       this.shipment.expectedArrivalDate &&
-      this.shipment.status &&
       this.shipment.carrierName &&
       this.shipment.modeOfTransport &&
       this.shipment.hsCode &&

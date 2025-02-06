@@ -21,121 +21,121 @@
     <h4>General Shipment Details</h4>
     <div class="p-field p-col-12 p-md-6">
       <p-floatLabel variant="in" style="margin-bottom:6px;">
-        <input id="containerNumber" pInputText [(ngModel)]="shipment.containerNumber" #containerNumber="ngModel" required [style]="{'width':'100%'}"/>
+        <input name="containerNumber" id="containerNumber" pInputText [(ngModel)]="shipment.containerNumber" #containerNumber="ngModel" required [style]="{'width':'100%'}"/>
         <label for="containerNumber">Container Number*</label>
       </p-floatLabel>
     </div>
 
     <div class="p-field p-col-12 p-md-6">
       <p-floatLabel variant="in" style="margin-bottom:6px;">
-        <input id="blNumber" pInputText [(ngModel)]="shipment.blNumber" [style]="{'width':'100%'}"/>
+        <input name="blNumber" id="blNumber" pInputText [(ngModel)]="shipment.blNumber" [style]="{'width':'100%'}"/>
         <label for="blNumber">Bill of Lading (BL) Number</label>
       </p-floatLabel>
     </div>
 
     <div class="p-field p-col-12 p-md-6">
       <p-floatLabel variant="in" style="margin-bottom:6px;">
-        <input id="originPort" pInputText [(ngModel)]="shipment.originPort" [style]="{'width':'100%'}" />
+        <input name="originPort" id="originPort" required pInputText [(ngModel)]="shipment.originPort" [style]="{'width':'100%'}" />
         <label for="originPort">Origin Port*</label>
       </p-floatLabel>
     </div>
 
     <div class="p-field p-col-12 p-md-6">
       <p-floatLabel variant="in" style="margin-bottom:6px;">
-        <input id="destinationPort" pInputText [(ngModel)]="shipment.destinationPort" [style]="{'width':'100%'}" />
+        <input name="destinationPort" id="destinationPort" required pInputText [(ngModel)]="shipment.destinationPort" [style]="{'width':'100%'}" />
         <label for="destinationPort">Destination Port*</label>
       </p-floatLabel>
     </div>
 
     <div class="p-field p-col-12 p-md-6">
       <p-floatLabel variant="in" style="margin-bottom:6px;">
-        <input id="shipperName" pInputText [(ngModel)]="shipment.shipperName" [style]="{'width':'100%'}" />
+        <input name="shipperName" id="shipperName" required pInputText [(ngModel)]="shipment.shipperName" [style]="{'width':'100%'}" />
         <label for="shipperName">Shipper Name*</label>
       </p-floatLabel>
     </div>
 
     <div class="p-field p-col-12 p-md-6">
       <p-floatLabel variant="in" style="margin-bottom:6px;">
-        <input id="consigneeName" pInputText [(ngModel)]="shipment.consigneeName" [style]="{'width':'100%'}" />
+        <input name="consigneeName" id="consigneeName" required pInputText [(ngModel)]="shipment.consigneeName" [style]="{'width':'100%'}" />
         <label for="consigneeName">Consignee Name*</label>
       </p-floatLabel>
     </div>
 
     <div class="p-field p-col-12 p-md-6">
       <p-floatLabel variant="in" style="margin-bottom:6px;">
-        <p-select id="cargoType" [options]="cargoTypes" [(ngModel)]="shipment.cargoType" [style]="{'width':'100%'}"></p-select>
+        <p-select id="cargoType" [options]="cargoTypes" required [(ngModel)]="shipment.cargoType" [style]="{'width':'100%'}"></p-select>
         <label for="cargoType">Cargo Type*</label>
       </p-floatLabel>
     </div>
 
     <div class="p-field p-col-12 p-md-6">
       <p-floatLabel variant="in" style="margin-bottom:6px;">
-        <input id="weight" pInputText [(ngModel)]="shipment.weight" type="number" [style]="{'width':'100%'}" />
-        <label for="weight">Weight (kg/tons)*</label>
+        <input name="weight" id="weight" pInputText required [(ngModel)]="shipment.weight" type="number" [style]="{'width':'100%'}" />
+        <label for="weight">Weight (kg)*</label>
       </p-floatLabel>
     </div>
 
     <div class="p-field p-col-12 p-md-6">
       <p-floatLabel variant="in" style="margin-bottom:6px;">
-        <input id="volume" pInputText [(ngModel)]="shipment.volume" type="number" [style]="{'width':'100%'}" />
+        <input name="volume" id="volume" pInputText [(ngModel)]="shipment.volume" type="number" [style]="{'width':'100%'}" />
         <label for="volume">Volume (CBM)</label>
       </p-floatLabel>
     </div>
 
     <div class="p-field p-col-12 p-md-6">
       <p-floatLabel variant="in" style="margin-bottom:6px;">
-        <input id="numberOfPackages" pInputText [(ngModel)]="shipment.numberOfPackages" type="number" [style]="{'width':'100%'}" />
+        <input name="numberOfPackages" id="numberOfPackages" pInputText [(ngModel)]="shipment.numberOfPackages" type="number" [style]="{'width':'100%'}" />
         <label for="numberOfPackages">Number of Packages</label>
       </p-floatLabel>
     </div>
 
     <div class="p-field p-col-12 p-md-6">
       <p-floatLabel variant="in" style="margin-bottom:6px;">
-        <p-calendar id="expectedDepartureDate" [(ngModel)]="shipment.expectedDepartureDate" [showIcon]="true"></p-calendar>
+        <p-calendar id="expectedDepartureDate" required [(ngModel)]="shipment.expectedDepartureDate" [showIcon]="true"></p-calendar>
         <label for="expectedDepartureDate">Expected Departure Date*</label>
       </p-floatLabel>
     </div>
 
     <div class="p-field p-col-12 p-md-6">
       <p-floatLabel variant="in" style="margin-bottom:6px;">
-        <p-calendar id="expectedArrivalDate" [(ngModel)]="shipment.expectedArrivalDate" [showIcon]="true"></p-calendar>
+        <p-calendar id="expectedArrivalDate" required [(ngModel)]="shipment.expectedArrivalDate" [showIcon]="true"></p-calendar>
         <label for="expectedArrivalDate">Expected Arrival Date*</label>
       </p-floatLabel>
     </div>
 
-    <div class="p-field p-col-12 p-md-6">
+    <!-- <div class="p-field p-col-12 p-md-6">
       <p-floatLabel variant="in" style="margin-bottom:6px;">
-        <p-select id="status" [options]="statuses" [(ngModel)]="shipment.status" [style]="{'width':'100%'}"></p-select>
+        <p-select id="status" [options]="statuses" required [(ngModel)]="shipment.status" [style]="{'width':'100%'}"></p-select>
         <label for="status">Status*</label>
       </p-floatLabel>
-    </div>
+    </div> -->
   </div>
 <div class="tracking">
 <h4>Tracking & Transportation Details</h4>
     <div class="p-field p-col-12 p-md-6">
       <p-floatLabel variant="in" style="margin-bottom:6px;">
-        <input id="carrierName" pInputText [(ngModel)]="shipment.carrierName"  [style]="{'width':'100%'}"/>
+        <input name="carrierName" id="carrierName" pInputText [(ngModel)]="shipment.carrierName"  [style]="{'width':'100%'}"/>
         <label for="carrierName">Shipping Line</label>
       </p-floatLabel>
     </div>
 
     <div class="p-field p-col-12 p-md-6">
       <p-floatLabel variant="in" style="margin-bottom:6px;">
-        <input id="vesselName" pInputText [(ngModel)]="shipment.vesselName" [style]="{'width':'100%'}"/>
+        <input name="vesselName" id="vesselName" required pInputText [(ngModel)]="shipment.vesselName" [style]="{'width':'100%'}"/>
         <label for="vesselName">Vessel Name*</label>
       </p-floatLabel>
     </div>
 
     <div class="p-field p-col-12 p-md-6">
       <p-floatLabel variant="in" style="margin-bottom:6px;">
-        <input id="trackingNumber" pInputText [(ngModel)]="shipment.trackingNumber" [style]="{'width':'100%'}" />
+        <input name="trackingNumber" id="trackingNumber" pInputText [(ngModel)]="shipment.trackingNumber" [style]="{'width':'100%'}" />
         <label for="trackingNumber">Tracking Number</label>
       </p-floatLabel>
     </div>
 
     <div class="p-field p-col-12 p-md-6">
       <p-floatLabel variant="in" style="margin-bottom:6px;">
-        <p-select id="modeOfTransport" [options]="modesOfTransport" [(ngModel)]="shipment.modeOfTransport" [style]="{'width':'100%'}"></p-select>
+        <p-select id="modeOfTransport" required [options]="modesOfTransport" [(ngModel)]="shipment.modeOfTransport" [style]="{'width':'100%'}"></p-select>
         <label for="modeOfTransport">Mode of Transport*</label>
       </p-floatLabel>
     </div>
@@ -156,21 +156,21 @@
   
   <div class="p-field p-col-12 p-md-6">
     <p-floatLabel variant="in" style="margin-bottom:6px;">
-      <input id="hsCode" pInputText [(ngModel)]="shipment.hsCode"  [style]="{'width':'100%'}" />
+      <input name="hsCode" id="hsCode" required pInputText [(ngModel)]="shipment.hsCode"  [style]="{'width':'100%'}" />
       <label for="hsCode">HS Code*</label>
     </p-floatLabel>
   </div>
   
   <div class="p-field p-col-12 p-md-6">
     <p-floatLabel variant="in" style="margin-bottom:6px;">
-      <input id="customsDeclarationNumber" pInputText [(ngModel)]="shipment.customsDeclarationNumber"  [style]="{'width':'100%'}" />
+      <input name="customsDeclarationNumber" id="customsDeclarationNumber" pInputText [(ngModel)]="shipment.customsDeclarationNumber"  [style]="{'width':'100%'}" />
       <label for="customsDeclarationNumber">Customs Declaration Number</label>
     </p-floatLabel>
   </div>
   
   <div class="p-field p-col-12 p-md-6">
     <p-floatLabel variant="in" style="margin-bottom:6px;">
-      <p-select id="inspectionStatus" [options]="inspectionStatuses" [(ngModel)]="shipment.inspectionStatus" [style]="{'width':'100%'}" appendTo="body" ></p-select>
+      <p-select id="inspectionStatus" required [options]="inspectionStatuses" [(ngModel)]="shipment.inspectionStatus" [style]="{'width':'100%'}" appendTo="body" ></p-select>
       <label for="inspectionStatus">Inspection Status*</label>
     </p-floatLabel>
   </div>

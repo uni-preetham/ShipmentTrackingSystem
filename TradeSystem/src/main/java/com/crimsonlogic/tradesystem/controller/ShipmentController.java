@@ -38,15 +38,6 @@ public class ShipmentController {
         return shipmentService.updateShipmentStatus(id, status);
     }
 
-//    @PutMapping("/{id}")
-//    public ResponseEntity<?> updateShipment(@PathVariable Long id, @RequestBody ShipmentDTO shipmentDTO) {
-//        try {
-//            Shipment updatedShipment = shipmentService.updateShipment(id, shipmentDTO);
-//            return ResponseEntity.ok(updatedShipment);
-//        } catch (ShipmentNotFoundException e) {
-//            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-//        }
-//    }
 
     @PutMapping("/{id}")
     public Shipment updateShipment(@PathVariable Long id, @RequestBody ShipmentDTO dto) {
