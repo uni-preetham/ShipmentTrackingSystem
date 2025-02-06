@@ -61,6 +61,8 @@ public class ShipmentController {
         shipment.setCustomsDeclarationNumber(dto.getCustomsDeclarationNumber());
         shipment.setDutiesPaid(dto.isDutiesPaid());
         shipment.setInspectionStatus(dto.getInspectionStatus());
+        shipment.setWeight(dto.getWeight());
+        shipment.setVolume(dto.getVolume());
         return shipmentRepository.save(shipment);
     }
 

@@ -34,6 +34,12 @@ export class ShipmentListComponent implements OnInit {
   modesOfTransport = ['Sea', 'Air', 'Land', 'Rail'];
   editDialog: boolean = false;
   selectedShipment: any = {};
+  filteredShipments: any[] = [];
+  searchContainer: string = '';
+  searchBL: string = '';
+  searchShipper: string = '';
+  searchConsignee: string = '';
+  filterStatus: string = '';
 
   constructor(private shipmentService: ShipmentService, private messageService: MessageService) {}
 
@@ -43,6 +49,19 @@ export class ShipmentListComponent implements OnInit {
 
   async loadShipments() {
     this.shipments = await this.shipmentService.getShipments();
+    this.filteredShipments = [...this.shipments];
+  }
+
+  filterShipments() {
+    this.filteredShipments = this.shipments.filter(shipment => {
+      return (
+        (!this.searchContainer || shipment.containerNumber.includes(this.searchContainer)) &&
+        (!this.searchBL || shipment.blNumber.includes(this.searchBL)) &&
+        (!this.searchShipper || shipment.shipperName.toLowerCase().includes(this.searchShipper.toLowerCase())) &&
+        (!this.searchConsignee || shipment.consigneeName.toLowerCase().includes(this.searchConsignee.toLowerCase())) &&
+        (!this.filterStatus || shipment.status === this.filterStatus)
+      );
+    });
   }
 
   async updateStatus(id: number, newStatus: string) {

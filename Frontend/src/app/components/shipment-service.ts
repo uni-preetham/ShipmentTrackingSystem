@@ -13,10 +13,15 @@ export class ShipmentService {
   }
 
   async createShipment(shipment: any): Promise<any> {
-    const response = await axios.post(this.apiUrl, shipment, {
-      headers : {'Content-Type' : 'application/json'}
-    });
-    return response.data;
+    try {
+      const response = await axios.post(`${this.apiUrl}`, shipment, { headers: { 'Content-Type': 'application/json' } });
+      return response.data;
+  } catch (error: any) {
+      if (error.response?.status === 409) {
+          throw new Error(error.response.data || "A shipment with this Container Number or BL Number already exists.");
+      }
+      throw new Error("Failed to create shipment.");
+  }
   }
 
   async updateShipmentStatus(id: number, status: string): Promise<any> {

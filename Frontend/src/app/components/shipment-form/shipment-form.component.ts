@@ -13,16 +13,27 @@ import { FloatLabelModule } from 'primeng/floatlabel';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { CardModule } from 'primeng/card';
+import { CommonModule } from '@angular/common';
 
 @Component({
-  imports: [
-    FormsModule, DialogModule, SelectModule, ButtonModule, FloatLabelModule,
-    TableModule, CalendarModule, CheckboxModule, InputTextModule, DropdownModule, ToastModule, CardModule
+  imports: [CommonModule,
+    FormsModule,
+    DialogModule,
+    SelectModule,
+    ButtonModule,
+    FloatLabelModule,
+    TableModule,
+    CalendarModule,
+    CheckboxModule,
+    InputTextModule,
+    DropdownModule,
+    ToastModule,
+    CardModule,
   ],
   selector: 'app-shipment-form',
   templateUrl: './shipment-form.component.html',
   styleUrls: ['./shipment-form.component.scss'],
-  providers: [MessageService]
+  providers: [MessageService],
 })
 export class ShipmentFormComponent {
   shipmentDialog: boolean = false;
@@ -54,19 +65,57 @@ export class ShipmentFormComponent {
     notes: '',
     hsCode: '',
     customsDeclarationNumber: '',
-    inspectionStatus: ''
+    inspectionStatus: '',
   };
 
-  constructor(private shipmentService: ShipmentService, private messageService: MessageService) {}
+  constructor(
+    private shipmentService: ShipmentService,
+    private messageService: MessageService
+  ) {}
 
   async addShipment() {
-    console.log(this.shipment);
-    await this.shipmentService.createShipment(this.shipment);
-    this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Shipment Added Successfully!' });
-    this.shipmentDialog = false;
+    if (!this.shipment.containerNumber || !this.shipment.originPort || !this.shipment.status || !this.shipment.hsCode) {
+      this.messageService.add({ severity: 'error', summary: 'Validation Error', detail: 'Please fill in all required fields' });
+      return;
+    }
+    try {
+      console.log(this.shipment);
+      await this.shipmentService.createShipment(this.shipment);
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Success',
+        detail: 'Shipment Added Successfully!',
+      });
+      this.shipmentDialog = false;
+    } catch (error: any) {
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: error.message,
+      });
+    }
   }
 
   openDialog() {
     this.shipmentDialog = true;
+  }
+
+  isFormValid(): boolean {
+    return !!(
+      this.shipment.containerNumber &&
+      this.shipment.originPort &&
+      this.shipment.destinationPort &&
+      this.shipment.shipperName &&
+      this.shipment.consigneeName &&
+      this.shipment.cargoType &&
+      this.shipment.weight !== null &&
+      this.shipment.expectedDepartureDate &&
+      this.shipment.expectedArrivalDate &&
+      this.shipment.status &&
+      this.shipment.carrierName &&
+      this.shipment.modeOfTransport &&
+      this.shipment.hsCode &&
+      this.shipment.inspectionStatus
+    );
   }
 }

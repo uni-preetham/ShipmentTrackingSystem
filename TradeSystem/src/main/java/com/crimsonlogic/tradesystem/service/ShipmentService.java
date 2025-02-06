@@ -2,6 +2,7 @@ package com.crimsonlogic.tradesystem.service;
 
 import com.crimsonlogic.tradesystem.DTO.ShipmentDTO;
 import com.crimsonlogic.tradesystem.entity.Shipment;
+import com.crimsonlogic.tradesystem.exception.ShipmentAlreadyExistsException;
 import com.crimsonlogic.tradesystem.exception.ShipmentNotFoundException;
 import com.crimsonlogic.tradesystem.repository.ShipmentRepository;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +17,10 @@ public class ShipmentService {
     private final ShipmentRepository shipmentRepository;
 
     public Shipment createShipment(ShipmentDTO dto) {
+        if (shipmentRepository.existsByContainerNumber(dto.getContainerNumber()) ||
+                (dto.getBlNumber() != null && shipmentRepository.existsByBlNumber(dto.getBlNumber()))) {
+            throw new ShipmentAlreadyExistsException("A shipment with this Container Number or BL Number already exists.");
+        }
         Shipment shipment = Shipment.builder()
                 .containerNumber(dto.getContainerNumber())
                 .blNumber(dto.getBlNumber())
