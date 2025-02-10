@@ -1,0 +1,19 @@
+<p-toast></p-toast>
+<div class="card">
+  <h2>Register</h2>
+  <div class="p-fluid">
+    <p-floatLabel>
+      <input type="text" id="username" pInputText [(ngModel)]="username" />
+      <label for="username">Username</label>
+    </p-floatLabel>
+
+    <p-floatLabel>
+      <input type="password" id="password" pInputText [(ngModel)]="password" />
+      <label for="password">Password</label>
+    </p-floatLabel>
+
+    <p-dropdown id="role" [options]="['USER', 'ADMIN']" [(ngModel)]="role"></p-dropdown>
+
+    <button pButton label="Register" icon="pi pi-user-plus" (click)="register()"></button>
+  </div>
+</div>

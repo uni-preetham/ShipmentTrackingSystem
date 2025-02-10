@@ -1,0 +1,17 @@
+<p-toast></p-toast>
+<div class="card">
+  <h2>Login</h2>
+  <div class="p-fluid">
+    <p-floatLabel>
+      <input type="text" id="username" pInputText [(ngModel)]="username" />
+      <label for="username">Username</label>
+    </p-floatLabel>
+    
+    <p-floatLabel>
+      <input type="password" id="password" pInputText [(ngModel)]="password" />
+      <label for="password">Password</label>
+    </p-floatLabel>
+
+    <button pButton label="Login" icon="pi pi-sign-in" (click)="login()"></button>
+  </div>
+</div>

@@ -5,16 +5,16 @@ import com.crimsonlogic.tradesystem.entity.Shipment;
 import com.crimsonlogic.tradesystem.exception.ShipmentAlreadyExistsException;
 import com.crimsonlogic.tradesystem.exception.ShipmentNotFoundException;
 import com.crimsonlogic.tradesystem.repository.ShipmentRepository;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
 public class ShipmentService {
 
-    private final ShipmentRepository shipmentRepository;
+    @Autowired
+    private ShipmentRepository shipmentRepository;
 
     public Shipment createShipment(ShipmentDTO dto) {
         if (shipmentRepository.existsByContainerNumber(dto.getContainerNumber()) ||
