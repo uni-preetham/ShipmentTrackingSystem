@@ -29,8 +29,8 @@
       <td>{{ shipment.containerNumber }}</td>
       <td>{{ shipment.originPort }}</td>
       <td>{{ shipment.destinationPort }}</td>
-      <td>
-        <p-select [options]="statuses" [(ngModel)]="shipment.status" appendTo="body" (onChange)="updateStatus(shipment.id, shipment.status)"></p-select>
+      <td> {{shipment.status}}
+        <!-- <p-select [options]="statuses" [(ngModel)]="shipment.status" appendTo="body" (onChange)="updateStatus(shipment.id, shipment.status)"></p-select> -->
       </td>
       <td>{{ shipment.weight }}</td>
       <td>{{ shipment.volume }}</td>

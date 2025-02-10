@@ -64,10 +64,10 @@ export class ShipmentListComponent implements OnInit {
     });
   }
 
-  async updateStatus(id: number, newStatus: string) {
-    await this.shipmentService.updateShipmentStatus(id, newStatus);
-    this.loadShipments();
-  }
+  // async updateStatus(id: number, newStatus: string) {
+  //   await this.shipmentService.updateShipmentStatus(id, newStatus);
+  //   this.loadShipments();
+  // }
 
   openDeleteDialog(id: number) {
     this.selectedShipmentId = id; // Store the shipment ID
