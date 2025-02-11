@@ -6,9 +6,12 @@ import { ToastModule } from 'primeng/toast';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { DropdownModule } from 'primeng/dropdown';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { MessageModule } from 'primeng/message';
+import { InputTextModule } from 'primeng/inputtext';
 
 @Component({
-  imports: [ToastModule, FloatLabelModule, DropdownModule, FormsModule],
+  imports: [ToastModule, FloatLabelModule, DropdownModule, FormsModule, CommonModule, MessageModule, InputTextModule],
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
@@ -17,7 +20,11 @@ import { FormsModule } from '@angular/forms';
 export class RegisterComponent {
   username = '';
   password = '';
+  fname = '';
+  lname = '';
   role = 'USER';
+  roles = ['USER', 'ADMIN'];
+  submitted = false;
 
   constructor(
     private authService: AuthService,
@@ -25,20 +32,19 @@ export class RegisterComponent {
     private messageService: MessageService
   ) {}
 
-  register() {
+  async register() {
+    this.submitted = true;
     if (!this.username || !this.password) {
       this.messageService.add({ severity: 'error', summary: 'Error', detail: 'All fields are required' });
       return;
     }
 
-    this.authService.register(this.username, this.password, this.role).subscribe({
-      next: () => {
-        this.messageService.add({ severity: 'success', summary: 'Registration Successful', detail: 'You can now log in' });
-        this.router.navigate(['/login']);
-      },
-      error: (err) => {
-        this.messageService.add({ severity: 'error', summary: 'Registration Failed', detail: err.error });
-      }
-    });
+    try {
+      await this.authService.register(this.username, this.password, this.role);
+      this.messageService.add({ severity: 'success', summary: 'Registration Successful', detail: 'You can now log in' });
+      this.router.navigate(['/login']);
+    } catch (error: any) {
+      this.messageService.add({ severity: 'error', summary: 'Registration Failed', detail: error.message });
+    }
   }
 }

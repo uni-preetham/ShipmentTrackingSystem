@@ -5,8 +5,15 @@ import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { FormsModule } from '@angular/forms';
+import { MessageModule } from 'primeng/message';
+import { CommonModule } from '@angular/common';
+import { InputTextModule } from 'primeng/inputtext';
+
+
+
+
 @Component({
-  imports: [ToastModule, FloatLabelModule, FormsModule],
+  imports: [ToastModule, FloatLabelModule, FormsModule, MessageModule, CommonModule, InputTextModule],
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
@@ -15,6 +22,7 @@ import { FormsModule } from '@angular/forms';
 export class LoginComponent {
   username = '';
   password = '';
+  submitted = false;
 
   constructor(
     private authService: AuthService,
@@ -22,21 +30,25 @@ export class LoginComponent {
     private messageService: MessageService
   ) {}
 
-  login() {
+  async login() {
+    this.submitted = true;
+
     if (!this.username || !this.password) {
-      this.messageService.add({ severity: 'error', summary: 'Error', detail: 'All fields are required' });
+      // this.messageService.add({ severity: 'error', summary: 'Error', detail: 'All fields are required' });
       return;
     }
 
-    this.authService.login(this.username, this.password).subscribe({
-      next: (user) => {
-        this.authService.setUser(user);
-        this.messageService.add({ severity: 'success', summary: 'Login Successful', detail: `Welcome, ${user.username}` });
-        this.router.navigate(['/shipments']);
-      },
-      error: (err) => {
-        this.messageService.add({ severity: 'error', summary: 'Login Failed', detail: err.error });
-      }
-    });
+    try {
+      const user = await this.authService.login(this.username, this.password);
+      this.authService.setUser(user);
+      // this.router.navigate(['/shipments']);
+      this.messageService.add({ severity: 'success', summary: 'Login Successful', detail: `Welcome, ${user.username}` });
+      setTimeout(() => {
+        this.router.navigate(['/dashboard']);
+      }, 1000); // ✅ Delay navigation so toast is visible
+      return;
+    } catch (error: any) {
+      this.messageService.add({ severity: 'error', summary: 'Login Failed', detail: error.message });
+    }
   }
 }

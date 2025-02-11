@@ -11,7 +11,7 @@ p{
 
 .section1, .section2{
     width: 1200px;
-    background: rgb(233, 248, 228);
+    background: rgb(185, 248, 207) ;
     display: flex;
     justify-content: space-around;
     align-items: center;

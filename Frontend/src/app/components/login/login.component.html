@@ -1,17 +1,44 @@
 <p-toast></p-toast>
-<div class="card">
-  <h2>Login</h2>
-  <div class="p-fluid">
-    <p-floatLabel>
-      <input type="text" id="username" pInputText [(ngModel)]="username" />
-      <label for="username">Username</label>
-    </p-floatLabel>
-    
-    <p-floatLabel>
-      <input type="password" id="password" pInputText [(ngModel)]="password" />
-      <label for="password">Password</label>
-    </p-floatLabel>
+<div class="container flex">
+  <div class="sidebar h-[100vh] w-[400px] bg-green-200"></div>
+  <div class="card flex flex-col justify-center items-center w-[100%] relative">
+    <a href="/register" class="absolute top-0 right-0 text-xl !py-2 !px-5 bg-green-500 rounded-4xl !m-5 text-white">Register</a>
 
-    <button pButton label="Login" icon="pi pi-sign-in" (click)="login()"></button>
+    <h2 class="text-6xl font-semibold !mb-10">Login</h2>
+    <div class="p-fluid flex flex-col justify-center">
+      <!-- <p-message severity="error" icon="pi pi-times-circle" styleClass="mb-2">Validation Failed</p-message> -->
+      <p-floatLabel variant="on" style="margin-bottom: 10px">
+        <input
+        type="text"
+          class="!px-5 !py-2"
+          id="username"
+          pInputText
+          [(ngModel)]="username"
+        />
+        <label for="username">Username</label>
+        <p-message *ngIf="submitted && !username"  severity="error" variant="simple" size="small">Username is required</p-message>
+      </p-floatLabel>
+
+      <p-floatLabel variant="on" style="margin-bottom: 10px">
+        <input
+        type="password"
+          class="!px-5 !py-2"
+          id="password"
+          pInputText
+          [(ngModel)]="password"
+        />
+        <label for="password">Password</label>
+        <p-message *ngIf="submitted && !username"  severity="error" variant="simple" size="small">Password is required</p-message>
+      </p-floatLabel>
+
+      <button
+        pButton
+        label="Login"
+        class="cursor-pointer bg-green-500 text-white font-semibold !py-2 !px-5 rounded-md"
+        (click)="login()"
+      >
+        Login
+      </button>
+    </div>
   </div>
 </div>

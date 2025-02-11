@@ -14,6 +14,7 @@ import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { CardModule } from 'primeng/card';
 import { CommonModule } from '@angular/common';
+import { MessageModule } from 'primeng/message';
 
 @Component({
   imports: [CommonModule,
@@ -29,6 +30,7 @@ import { CommonModule } from '@angular/common';
     DropdownModule,
     ToastModule,
     CardModule,
+    MessageModule,
   ],
   selector: 'app-shipment-form',
   templateUrl: './shipment-form.component.html',
@@ -42,6 +44,7 @@ export class ShipmentFormComponent {
   cargoTypes = ['General Cargo', 'Liquid', 'Dangerous Goods'];
   modesOfTransport = ['Sea', 'Air', 'Land', 'Rail'];
   inspectionStatuses = ['Pending', 'Cleared', 'Held for Inspection'];
+  submitted = false;
 
   shipment = {
     containerNumber: '',
@@ -74,7 +77,8 @@ export class ShipmentFormComponent {
   ) {}
 
   async addShipment() {
-    if (!this.shipment.containerNumber || !this.shipment.originPort || !this.shipment.hsCode) {
+    this.submitted = true;
+    if (!this.shipment.containerNumber || !this.shipment.carrierName || !this.shipment.modeOfTransport || !this.shipment.hsCode) {
       this.messageService.add({ severity: 'error', summary: 'Validation Error', detail: 'Please fill in all required fields' });
       return;
     }
@@ -102,18 +106,18 @@ export class ShipmentFormComponent {
   isFormValid(): boolean {
     return !!(
       this.shipment.containerNumber &&
-      this.shipment.originPort &&
-      this.shipment.destinationPort &&
-      this.shipment.shipperName &&
-      this.shipment.consigneeName &&
-      this.shipment.cargoType &&
-      this.shipment.weight !== null &&
-      this.shipment.expectedDepartureDate &&
-      this.shipment.expectedArrivalDate &&
+      // this.shipment.originPort &&
+      // this.shipment.destinationPort &&
+      // this.shipment.shipperName &&
+      // this.shipment.consigneeName &&
+      // this.shipment.cargoType &&
+      // this.shipment.weight !== null &&
+      // this.shipment.expectedDepartureDate &&
+      // this.shipment.expectedArrivalDate &&
       this.shipment.carrierName &&
       this.shipment.modeOfTransport &&
-      this.shipment.hsCode &&
-      this.shipment.inspectionStatus
+      // this.shipment.inspectionStatus &&
+      this.shipment.hsCode
     );
   }
 }
