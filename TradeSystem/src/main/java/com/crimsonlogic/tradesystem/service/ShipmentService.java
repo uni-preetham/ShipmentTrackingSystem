@@ -21,35 +21,40 @@ public class ShipmentService {
                 (dto.getBlNumber() != null && shipmentRepository.existsByBlNumber(dto.getBlNumber()))) {
             throw new ShipmentAlreadyExistsException("A shipment with this Container Number or BL Number already exists.");
         }
-        Shipment shipment = Shipment.builder()
-                .containerNumber(dto.getContainerNumber())
-                .blNumber(dto.getBlNumber())
-                .originPort(dto.getOriginPort())
-                .destinationPort(dto.getDestinationPort())
-                .shipperName(dto.getShipperName())
-                .consigneeName(dto.getConsigneeName())
-                .cargoType(dto.getCargoType())
-                .weight(dto.getWeight())
-                .volume(dto.getVolume())
-                .numberOfPackages(dto.getNumberOfPackages())
-                .expectedDepartureDate(dto.getExpectedDepartureDate())
-                .expectedArrivalDate(dto.getExpectedArrivalDate())
-                .status("Pending")
-                .carrierName(dto.getCarrierName())
-                .vesselName(dto.getVesselName())
-                .trackingNumber(dto.getTrackingNumber())
-                .modeOfTransport(dto.getModeOfTransport())
-                .eta(dto.getEta())
-                .etd(dto.getEtd())
-                .hsCode(dto.getHsCode())
-                .customsDeclarationNumber(dto.getCustomsDeclarationNumber())
-                .dutiesPaid(dto.isDutiesPaid())
-                .inspectionStatus(dto.getInspectionStatus())
-                .notes(dto.getNotes())
-                .deleted(false)
-                .build();
+        Shipment shipment = new Shipment(
+                null, // id is auto-generated, so we pass null here
+                dto.getContainerNumber(),
+                dto.getBlNumber(),
+                dto.getOriginPort(),
+                dto.getDestinationPort(),
+                dto.getShipperName(),
+                dto.getConsigneeName(),
+                dto.getCargoType(),
+                dto.getWeight(),
+                dto.getVolume(),
+                dto.getNumberOfPackages(),
+                dto.getExpectedDepartureDate(),
+                dto.getExpectedArrivalDate(),
+                "Pending", // status is hardcoded as "Pending"
+                dto.getCarrierName(),
+                dto.getVesselName(),
+                dto.getTrackingNumber(),
+                dto.getModeOfTransport(),
+                dto.getEta(),
+                dto.getEtd(),
+                dto.getHsCode(),
+                dto.getCustomsDeclarationNumber(),
+                dto.isDutiesPaid(),
+                dto.getInspectionStatus(),
+                dto.getNotes(),
+                false, // deleted is false
+                null, // lastModifiedBy is null initially
+                null  // lastModifiedAt is null initially
+        );
 
+// Save the shipment to the repository
         return shipmentRepository.save(shipment);
+
     }
 
     public List<Shipment> getAllShipments() {

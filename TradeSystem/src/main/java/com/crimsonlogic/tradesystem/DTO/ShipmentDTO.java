@@ -1,6 +1,7 @@
 package com.crimsonlogic.tradesystem.DTO;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class ShipmentDTO {
     private String containerNumber;
@@ -27,8 +28,11 @@ public class ShipmentDTO {
     private boolean dutiesPaid;
     private String inspectionStatus;
     private String notes;
+    private String lastModifiedBy;
+    private LocalDateTime lastModifiedAt;
 
-    public ShipmentDTO(String containerNumber, String blNumber, String originPort, String destinationPort, String shipperName, String consigneeName, String cargoType, double weight, double volume, int numberOfPackages, LocalDate expectedDepartureDate, LocalDate expectedArrivalDate, String status, String carrierName, String vesselName, String trackingNumber, String modeOfTransport, LocalDate eta, LocalDate etd, String hsCode, String customsDeclarationNumber, boolean dutiesPaid, String inspectionStatus, String notes) {
+
+    public ShipmentDTO(String containerNumber, String blNumber, String originPort, String destinationPort, String shipperName, String consigneeName, String cargoType, double weight, double volume, int numberOfPackages, LocalDate expectedDepartureDate, LocalDate expectedArrivalDate, String status, String carrierName, String vesselName, String trackingNumber, String modeOfTransport, LocalDate eta, LocalDate etd, String hsCode, String customsDeclarationNumber, boolean dutiesPaid, String inspectionStatus, String notes, String lastModifiedBy, LocalDateTime lastModifiedAt) {
         this.containerNumber = containerNumber;
         this.blNumber = blNumber;
         this.originPort = originPort;
@@ -53,15 +57,31 @@ public class ShipmentDTO {
         this.dutiesPaid = dutiesPaid;
         this.inspectionStatus = inspectionStatus;
         this.notes = notes;
+        this.lastModifiedBy = lastModifiedBy;
+        this.lastModifiedAt = lastModifiedAt;
     }
 
     public ShipmentDTO() {
     }
 
-    public static ShipmentDTOBuilder builder() {
-        return new ShipmentDTOBuilder();
+
+
+
+    public String getLastModifiedBy() {
+        return lastModifiedBy;
     }
 
+    public void setLastModifiedBy(String lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
+    }
+
+    public LocalDateTime getLastModifiedAt() {
+        return lastModifiedAt;
+    }
+
+    public void setLastModifiedAt(LocalDateTime lastModifiedAt) {
+        this.lastModifiedAt = lastModifiedAt;
+    }
 
     public String getContainerNumber() {
         return this.containerNumber;
@@ -400,161 +420,5 @@ public class ShipmentDTO {
         return "ShipmentDTO(containerNumber=" + this.getContainerNumber() + ", blNumber=" + this.getBlNumber() + ", originPort=" + this.getOriginPort() + ", destinationPort=" + this.getDestinationPort() + ", shipperName=" + this.getShipperName() + ", consigneeName=" + this.getConsigneeName() + ", cargoType=" + this.getCargoType() + ", weight=" + this.getWeight() + ", volume=" + this.getVolume() + ", numberOfPackages=" + this.getNumberOfPackages() + ", expectedDepartureDate=" + this.getExpectedDepartureDate() + ", expectedArrivalDate=" + this.getExpectedArrivalDate() + ", status=" + this.getStatus() + ", carrierName=" + this.getCarrierName() + ", vesselName=" + this.getVesselName() + ", trackingNumber=" + this.getTrackingNumber() + ", modeOfTransport=" + this.getModeOfTransport() + ", eta=" + this.getEta() + ", etd=" + this.getEtd() + ", hsCode=" + this.getHsCode() + ", customsDeclarationNumber=" + this.getCustomsDeclarationNumber() + ", dutiesPaid=" + this.isDutiesPaid() + ", inspectionStatus=" + this.getInspectionStatus() + ", notes=" + this.getNotes() + ")";
     }
 
-    public static class ShipmentDTOBuilder {
-        private String containerNumber;
-        private String blNumber;
-        private String originPort;
-        private String destinationPort;
-        private String shipperName;
-        private String consigneeName;
-        private String cargoType;
-        private double weight;
-        private double volume;
-        private int numberOfPackages;
-        private LocalDate expectedDepartureDate;
-        private LocalDate expectedArrivalDate;
-        private String status;
-        private String carrierName;
-        private String vesselName;
-        private String trackingNumber;
-        private String modeOfTransport;
-        private LocalDate eta;
-        private LocalDate etd;
-        private String hsCode;
-        private String customsDeclarationNumber;
-        private boolean dutiesPaid;
-        private String inspectionStatus;
-        private String notes;
 
-        ShipmentDTOBuilder() {
-        }
-
-        public ShipmentDTOBuilder containerNumber(String containerNumber) {
-            this.containerNumber = containerNumber;
-            return this;
-        }
-
-        public ShipmentDTOBuilder blNumber(String blNumber) {
-            this.blNumber = blNumber;
-            return this;
-        }
-
-        public ShipmentDTOBuilder originPort(String originPort) {
-            this.originPort = originPort;
-            return this;
-        }
-
-        public ShipmentDTOBuilder destinationPort(String destinationPort) {
-            this.destinationPort = destinationPort;
-            return this;
-        }
-
-        public ShipmentDTOBuilder shipperName(String shipperName) {
-            this.shipperName = shipperName;
-            return this;
-        }
-
-        public ShipmentDTOBuilder consigneeName(String consigneeName) {
-            this.consigneeName = consigneeName;
-            return this;
-        }
-
-        public ShipmentDTOBuilder cargoType(String cargoType) {
-            this.cargoType = cargoType;
-            return this;
-        }
-
-        public ShipmentDTOBuilder weight(double weight) {
-            this.weight = weight;
-            return this;
-        }
-
-        public ShipmentDTOBuilder volume(double volume) {
-            this.volume = volume;
-            return this;
-        }
-
-        public ShipmentDTOBuilder numberOfPackages(int numberOfPackages) {
-            this.numberOfPackages = numberOfPackages;
-            return this;
-        }
-
-        public ShipmentDTOBuilder expectedDepartureDate(LocalDate expectedDepartureDate) {
-            this.expectedDepartureDate = expectedDepartureDate;
-            return this;
-        }
-
-        public ShipmentDTOBuilder expectedArrivalDate(LocalDate expectedArrivalDate) {
-            this.expectedArrivalDate = expectedArrivalDate;
-            return this;
-        }
-
-        public ShipmentDTOBuilder status(String status) {
-            this.status = status;
-            return this;
-        }
-
-        public ShipmentDTOBuilder carrierName(String carrierName) {
-            this.carrierName = carrierName;
-            return this;
-        }
-
-        public ShipmentDTOBuilder vesselName(String vesselName) {
-            this.vesselName = vesselName;
-            return this;
-        }
-
-        public ShipmentDTOBuilder trackingNumber(String trackingNumber) {
-            this.trackingNumber = trackingNumber;
-            return this;
-        }
-
-        public ShipmentDTOBuilder modeOfTransport(String modeOfTransport) {
-            this.modeOfTransport = modeOfTransport;
-            return this;
-        }
-
-        public ShipmentDTOBuilder eta(LocalDate eta) {
-            this.eta = eta;
-            return this;
-        }
-
-        public ShipmentDTOBuilder etd(LocalDate etd) {
-            this.etd = etd;
-            return this;
-        }
-
-        public ShipmentDTOBuilder hsCode(String hsCode) {
-            this.hsCode = hsCode;
-            return this;
-        }
-
-        public ShipmentDTOBuilder customsDeclarationNumber(String customsDeclarationNumber) {
-            this.customsDeclarationNumber = customsDeclarationNumber;
-            return this;
-        }
-
-        public ShipmentDTOBuilder dutiesPaid(boolean dutiesPaid) {
-            this.dutiesPaid = dutiesPaid;
-            return this;
-        }
-
-        public ShipmentDTOBuilder inspectionStatus(String inspectionStatus) {
-            this.inspectionStatus = inspectionStatus;
-            return this;
-        }
-
-        public ShipmentDTOBuilder notes(String notes) {
-            this.notes = notes;
-            return this;
-        }
-
-        public ShipmentDTO build() {
-            return new ShipmentDTO(this.containerNumber, this.blNumber, this.originPort, this.destinationPort, this.shipperName, this.consigneeName, this.cargoType, this.weight, this.volume, this.numberOfPackages, this.expectedDepartureDate, this.expectedArrivalDate, this.status, this.carrierName, this.vesselName, this.trackingNumber, this.modeOfTransport, this.eta, this.etd, this.hsCode, this.customsDeclarationNumber, this.dutiesPaid, this.inspectionStatus, this.notes);
-        }
-
-        public String toString() {
-            return "ShipmentDTO.ShipmentDTOBuilder(containerNumber=" + this.containerNumber + ", blNumber=" + this.blNumber + ", originPort=" + this.originPort + ", destinationPort=" + this.destinationPort + ", shipperName=" + this.shipperName + ", consigneeName=" + this.consigneeName + ", cargoType=" + this.cargoType + ", weight=" + this.weight + ", volume=" + this.volume + ", numberOfPackages=" + this.numberOfPackages + ", expectedDepartureDate=" + this.expectedDepartureDate + ", expectedArrivalDate=" + this.expectedArrivalDate + ", status=" + this.status + ", carrierName=" + this.carrierName + ", vesselName=" + this.vesselName + ", trackingNumber=" + this.trackingNumber + ", modeOfTransport=" + this.modeOfTransport + ", eta=" + this.eta + ", etd=" + this.etd + ", hsCode=" + this.hsCode + ", customsDeclarationNumber=" + this.customsDeclarationNumber + ", dutiesPaid=" + this.dutiesPaid + ", inspectionStatus=" + this.inspectionStatus + ", notes=" + this.notes + ")";
-        }
-    }
 }

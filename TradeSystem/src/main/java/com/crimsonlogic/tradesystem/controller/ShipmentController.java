@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -53,6 +54,10 @@ public class ShipmentController {
         shipment.setInspectionStatus(dto.getInspectionStatus());
         shipment.setWeight(dto.getWeight());
         shipment.setVolume(dto.getVolume());
+
+        shipment.setLastModifiedBy(dto.getLastModifiedBy());
+        shipment.setLastModifiedAt(LocalDateTime.now());
+
         return shipmentRepository.save(shipment);
     }
 

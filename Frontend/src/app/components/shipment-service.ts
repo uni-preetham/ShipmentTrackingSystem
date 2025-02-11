@@ -30,6 +30,9 @@ export class ShipmentService {
   }
 
   async updateShipment(shipment: any): Promise<any> {
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    shipment.lastModifiedBy = user.firstName+" "+user.lastName; 
+
     const response = await axios.put(`${this.apiUrl}/${shipment.id}`, shipment,{headers : {'Content-Type' : 'application/json'}});
     return response.data;
   }
