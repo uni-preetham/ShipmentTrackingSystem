@@ -74,20 +74,43 @@ export class ShipmentListComponent implements OnInit {
     this.deleteDialog = true; // Show the delete confirmation dialog
   }
 
+  // async confirmDelete() {
+  //   if (this.selectedShipmentId !== null) {
+  //     try {
+  //       const response = await this.shipmentService.deleteShipment(this.selectedShipmentId);
+  //       this.messageService.add({ severity: 'success', summary: 'Deleted', detail: response });
+  //       this.loadShipments();
+  //     } catch (error: any) {
+  //       this.messageService.add({ severity: 'error', summary: 'Error', detail: error.response?.data || error.message });
+  //     } finally {
+  //       this.deleteDialog = false; // Close dialog after processing
+  //       this.selectedShipmentId = null; // Reset selection
+  //     }
+  //   }
+  // }
+
   async confirmDelete() {
     if (this.selectedShipmentId !== null) {
-      try {
-        const response = await this.shipmentService.deleteShipment(this.selectedShipmentId);
-        this.messageService.add({ severity: 'success', summary: 'Deleted', detail: response });
-        this.loadShipments();
-      } catch (error: any) {
-        this.messageService.add({ severity: 'error', summary: 'Error', detail: error.response?.data || 'Failed to delete shipment.' });
-      } finally {
-        this.deleteDialog = false; // Close dialog after processing
-        this.selectedShipmentId = null; // Reset selection
-      }
+        try {
+            const user = JSON.parse(localStorage.getItem('user') || '{}'); // Get user from local storage
+            const deleteRequest = {
+                id: this.selectedShipmentId,  // Ensure ID is included
+                lastModifiedBy: user.firstName + " " + user.lastName, // Pass lastModifiedBy
+            };
+
+            const response = await this.shipmentService.deleteShipment(deleteRequest);
+            this.messageService.add({ severity: 'success', summary: 'Deleted', detail: response });
+
+            this.loadShipments();
+        } catch (error: any) {
+            this.messageService.add({ severity: 'error', summary: 'Error', detail: error.response?.data || error.message });
+        } finally {
+            this.deleteDialog = false; // Close dialog
+            this.selectedShipmentId = null; // Reset selection
+        }
     }
-  }
+}
+
 
   cancelDelete() {
     this.deleteDialog = false;

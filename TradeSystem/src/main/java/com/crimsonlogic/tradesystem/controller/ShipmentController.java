@@ -62,10 +62,26 @@ public class ShipmentController {
     }
 
 
+//    @DeleteMapping("/{id}")
+//    public ResponseEntity<?> deleteShipment(@PathVariable Long id) {
+//        try {
+//            shipmentService.deleteShipment(id);
+//            return ResponseEntity.ok("Shipment deleted successfully!");
+//        } catch (IllegalStateException e) {
+//            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+//        } catch (Exception e) {
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred.");
+//        }
+//    }
+
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteShipment(@PathVariable Long id) {
+    public ResponseEntity<?> deleteShipment(@PathVariable Long id, @RequestBody(required = false) ShipmentDTO dto) {
+        if (dto == null || dto.getLastModifiedBy() == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Missing lastModifiedBy in request.");
+        }
+
         try {
-            shipmentService.deleteShipment(id);
+            shipmentService.deleteShipment(id, dto);
             return ResponseEntity.ok("Shipment deleted successfully!");
         } catch (IllegalStateException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());

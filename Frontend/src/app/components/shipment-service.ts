@@ -37,8 +37,22 @@ export class ShipmentService {
     return response.data;
   }
 
-  async deleteShipment(id: number): Promise<any> {
-    const response = await axios.delete(`${this.apiUrl}/${id}`);
+  // async deleteShipment(id: number): Promise<any> {
+  //   const response = await axios.delete(`${this.apiUrl}/${id}`);
+  //   return response.data;
+  // }
+
+  async deleteShipment(shipment:any){
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    shipment.lastModifiedBy = user.firstName+" "+user.lastName; 
+
+    const response = await axios.request({
+      method: 'DELETE',
+      url: `${this.apiUrl}/${shipment.id}`,
+      data: shipment, // Send the shipment as the request body
+      headers: { 'Content-Type': 'application/json' }
+  });
+
     return response.data;
   }
 }

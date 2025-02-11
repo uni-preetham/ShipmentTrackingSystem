@@ -8,6 +8,7 @@ import com.crimsonlogic.tradesystem.repository.ShipmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -71,7 +72,19 @@ public class ShipmentService {
         return shipmentRepository.save(shipment);
     }
 
-    public void deleteShipment(Long id) {
+//    public void deleteShipment(Long id) {
+//        Shipment shipment = shipmentRepository.findById(id)
+//                .orElseThrow(() -> new ShipmentNotFoundException("Shipment not found"));
+//
+//        if ("Cleared".equals(shipment.getStatus())) {
+//            throw new IllegalStateException("Cleared shipments cannot be deleted.");
+//        }
+//
+//        shipment.setDeleted(true);
+//        shipmentRepository.save(shipment);
+//    }
+
+    public void deleteShipment(Long id, ShipmentDTO dto) {
         Shipment shipment = shipmentRepository.findById(id)
                 .orElseThrow(() -> new ShipmentNotFoundException("Shipment not found"));
 
@@ -80,6 +93,10 @@ public class ShipmentService {
         }
 
         shipment.setDeleted(true);
+        shipment.setLastModifiedBy(dto.getLastModifiedBy()); // Track who deleted it
+        shipment.setLastModifiedAt(LocalDateTime.now()); // Track when it was deleted
+
         shipmentRepository.save(shipment);
     }
+
 }
