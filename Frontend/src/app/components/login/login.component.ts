@@ -42,7 +42,7 @@ export class LoginComponent {
       const user = await this.authService.login(this.username, this.password);
       this.authService.setUser(user);
       // this.router.navigate(['/shipments']);
-      this.messageService.add({ severity: 'success', summary: 'Login Successful', detail: `Welcome, ${user.username}` });
+      this.messageService.add({ severity: 'success', summary: 'Login Successful', detail: `Welcome, ${user.firstName} ${user.lastName}` });
       setTimeout(() => {
         this.router.navigate(['/dashboard']);
       }, 1000); // ✅ Delay navigation so toast is visible

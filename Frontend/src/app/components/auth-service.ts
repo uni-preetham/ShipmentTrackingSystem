@@ -9,9 +9,9 @@ export class AuthService {
 
   constructor() {}
 
-  async register(username: string, password: string, role: string): Promise<any> {
+  async register(username: string, password: string, role: string, firstName:string, lastName: string): Promise<any> {
     try {
-      const response = await axios.post(`${this.apiUrl}/register`, { username, password, role });
+      const response = await axios.post(`${this.apiUrl}/register`, { username, password, role, firstName, lastName });
       return response.data;
     } catch (error: any) {
       console.error('Registration Error:', error.response?.data || error.message);

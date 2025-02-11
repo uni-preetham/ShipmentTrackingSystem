@@ -26,8 +26,9 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody User user) {
+        System.out.println(user);
         try {
-            User newUser = authService.registerUser(user.getUsername(), user.getPassword(), user.getRole());
+            User newUser = authService.registerUser(user.getUsername(), user.getPassword(), user.getRole(), user.getFirstName(), user.getLastName());
             return ResponseEntity.ok(newUser);
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());

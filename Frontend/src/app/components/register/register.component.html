@@ -27,12 +27,22 @@
 
       <p-floatLabel variant="on" class="!mb-5">
         <input type="text"
-        id="fname"
+        id="firstName"
         class="!px-5 !py-2"
         pInputText
-        [(ngModel)]="fname"/>
-        <label for="fname">Password</label>
-        <p-message *ngIf="submitted && !fname"  severity="error" variant="simple" size="small">First name is required</p-message>
+        [(ngModel)]="firstName"/>
+        <label for="fname">First Name</label>
+        <p-message *ngIf="submitted && !firstName"  severity="error" variant="simple" size="small">First name is required</p-message>
+      </p-floatLabel>
+
+      <p-floatLabel variant="on" class="!mb-5">
+        <input type="text"
+        id="lastName"
+        class="!px-5 !py-2"
+        pInputText
+        [(ngModel)]="lastName"/>
+        <label for="fname">Last Name</label>
+        <p-message *ngIf="submitted && !lastName"  severity="error" variant="simple" size="small">Last name is required</p-message>
       </p-floatLabel>
 
       <p-dropdown

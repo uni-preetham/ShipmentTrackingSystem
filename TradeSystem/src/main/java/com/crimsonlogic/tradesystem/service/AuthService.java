@@ -22,7 +22,7 @@ public class AuthService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public User registerUser(String username, String password, String role) {
+    public User registerUser(String username, String password, String role, String firstName, String lastName) {
         Optional<User> existingUser = userRepository.findByUsername(username);
         if (existingUser.isPresent()) {
             throw new RuntimeException("Username already taken");
@@ -32,6 +32,8 @@ public class AuthService {
                 .username(username)
                 .password(passwordEncoder.encode(password))
                 .role(role.toUpperCase()) // Convert role to uppercase (USER or ADMIN)
+                .firstName(firstName)
+                .lastName(lastName)
                 .build();
 
         return userRepository.save(user);

@@ -20,8 +20,8 @@ import { InputTextModule } from 'primeng/inputtext';
 export class RegisterComponent {
   username = '';
   password = '';
-  fname = '';
-  lname = '';
+  firstName = '';
+  lastName = '';
   role = 'USER';
   roles = ['USER', 'ADMIN'];
   submitted = false;
@@ -40,7 +40,7 @@ export class RegisterComponent {
     }
 
     try {
-      await this.authService.register(this.username, this.password, this.role);
+      await this.authService.register(this.username, this.password, this.role, this.firstName, this.lastName);
       this.messageService.add({ severity: 'success', summary: 'Registration Successful', detail: 'You can now log in' });
       this.router.navigate(['/login']);
     } catch (error: any) {
