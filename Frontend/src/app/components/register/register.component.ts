@@ -25,7 +25,7 @@ export class RegisterComponent {
   role = 'USER';
   roles = ['USER', 'ADMIN'];
   submitted = false;
-
+  confirmPassword='';
   constructor(
     private authService: AuthService,
     private router: Router,
@@ -36,6 +36,11 @@ export class RegisterComponent {
     this.submitted = true;
     if (!this.username || !this.password) {
       this.messageService.add({ severity: 'error', summary: 'Error', detail: 'All fields are required' });
+      return;
+    }
+
+    if( this.confirmPassword!=this.password){
+      this.messageService.add({ severity: 'error', summary: 'Error', detail: `Passwords don't match` });
       return;
     }
 

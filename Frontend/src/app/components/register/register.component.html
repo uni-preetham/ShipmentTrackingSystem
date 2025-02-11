@@ -22,7 +22,19 @@
           [(ngModel)]="password"
         />
         <label for="password">Password</label>
-        <p-message *ngIf="submitted && !username"  severity="error" variant="simple" size="small">Password is required</p-message>
+        <p-message *ngIf="submitted && !password" severity="error" variant="simple" size="small">Password is required</p-message>
+      </p-floatLabel>
+      
+      <p-floatLabel variant="on" style="margin-bottom: 10px">
+        <input
+          type="password"
+          id="confirmpassword"
+          class="!px-5 !py-2"
+          pInputText
+          [(ngModel)]="confirmPassword"
+        />
+        <label for="confirmpassword">Confirm Password</label>
+        <p-message *ngIf="submitted && password !== confirmPassword" severity="error" variant="simple" size="small">Passwords don't match</p-message>
       </p-floatLabel>
 
       <p-floatLabel variant="on" class="!mb-5">
