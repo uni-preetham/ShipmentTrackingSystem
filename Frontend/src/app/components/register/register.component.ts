@@ -32,6 +32,31 @@ export class RegisterComponent {
     private messageService: MessageService
   ) {}
 
+
+  // Validate password (at least one uppercase, one lowercase, one digit, one special character, 8-20 characters)
+  isUsernameValid(): boolean {
+    const usernamePattern = /^[a-zA-Z0-9]{1,20}$/;
+    return usernamePattern.test(this.username);
+  }
+
+  // Validate password (at least one uppercase, one lowercase, one digit, one special character, 8-20 characters)
+  isPasswordValid(): boolean {
+    const passwordPattern = /^[a-zA-Z0-9]{1,20}$/;
+    return passwordPattern.test(this.password);
+  }
+
+  // Validate first name (only letters)
+  isFirstNameValid(): boolean {
+    const namePattern = /^[a-zA-Z]+$/;
+    return namePattern.test(this.firstName);
+  }
+
+  // Validate last name (only letters)
+  isLastNameValid(): boolean {
+    const namePattern = /^[a-zA-Z]+$/;
+    return namePattern.test(this.lastName);
+  }
+
   async register() {
     this.submitted = true;
     if (!this.username || !this.password) {
@@ -44,12 +69,20 @@ export class RegisterComponent {
       return;
     }
 
-    try {
-      await this.authService.register(this.username, this.password, this.role, this.firstName, this.lastName);
-      this.messageService.add({ severity: 'success', summary: 'Registration Successful', detail: 'You can now log in' });
-      this.router.navigate(['/login']);
-    } catch (error: any) {
-      this.messageService.add({ severity: 'error', summary: 'Registration Failed', detail: error.message });
+    if (this.isUsernameValid() && this.isPasswordValid() && this.isFirstNameValid() && this.isLastNameValid()) {
+      try {
+        await this.authService.register(this.username, this.password, this.role, this.firstName, this.lastName);
+        this.messageService.add({ severity: 'success', summary: 'Registration Successful', detail: 'You can now log in' });
+        this.router.navigate(['/login']);
+      } catch (error: any) {
+        this.messageService.add({ severity: 'error', summary: 'Registration Failed', detail: error.message });
+      }
+    } else {
+      console.log('Form is invalid!');
     }
+  
+
+
+    
   }
 }

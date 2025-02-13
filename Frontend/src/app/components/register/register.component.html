@@ -8,9 +8,11 @@
       <p-floatLabel variant="on" style="margin-bottom: 10px">
         <input type="text" id="username" 
         class="!px-5 !py-2"
+        pattern="^[a-zA-Z0-9]{1,20}$"
         pInputText [(ngModel)]="username" />
         <label for="username">Username</label>
         <p-message *ngIf="submitted && !username"  severity="error" variant="simple" size="small">Username is required</p-message>
+        <p-message *ngIf="submitted && username && !isUsernameValid()" severity="error" variant="simple" size="small">Username must be 1-20 alphanumeric characters</p-message>
       </p-floatLabel>
 
       <p-floatLabel variant="on" style="margin-bottom: 10px">
@@ -18,11 +20,14 @@
           type="password"
           id="password"
           class="!px-5 !py-2"
+          pattern="^[a-zA-Z0-9]{1,20}$"
           pInputText
           [(ngModel)]="password"
         />
         <label for="password">Password</label>
         <p-message *ngIf="submitted && !password" severity="error" variant="simple" size="small">Password is required</p-message>
+        <p-message *ngIf="submitted && username && !isPasswordValid()" severity="error" variant="simple" size="small">Password must be 1-20 alphanumeric characters</p-message>
+
       </p-floatLabel>
       
       <p-floatLabel variant="on" style="margin-bottom: 10px">
@@ -42,9 +47,12 @@
         id="firstName"
         class="!px-5 !py-2"
         pInputText
+        pattern="^[a-zA-Z]+$"
         [(ngModel)]="firstName"/>
         <label for="fname">First Name</label>
         <p-message *ngIf="submitted && !firstName"  severity="error" variant="simple" size="small">First name is required</p-message>
+        <p-message *ngIf="submitted && username && !isFirstNameValid()" severity="error" variant="simple" size="small">Name should only contain letters</p-message>
+
       </p-floatLabel>
 
       <p-floatLabel variant="on" class="!mb-5">
@@ -52,17 +60,20 @@
         id="lastName"
         class="!px-5 !py-2"
         pInputText
+        pattern="^[a-zA-Z]+$"
         [(ngModel)]="lastName"/>
         <label for="fname">Last Name</label>
         <p-message *ngIf="submitted && !lastName"  severity="error" variant="simple" size="small">Last name is required</p-message>
+        <p-message *ngIf="submitted && username && !isLastNameValid()" severity="error" variant="simple" size="small">Name should only contain letters</p-message>
+
       </p-floatLabel>
 
-      <p-dropdown
+      <!-- <p-dropdown
         id="role"
         [options]="['USER', 'ADMIN']"
         [(ngModel)]="role"
         class="!mb-[20px]"
-      ></p-dropdown>
+      ></p-dropdown> -->
 
       <button
         pButton
